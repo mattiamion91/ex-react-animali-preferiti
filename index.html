@@ -7,23 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
+    <!--react-->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!--reactDom-->
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!--babel-->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
         //script creazione componente react
         const ReactApp = () => {
+            const {useState} = React;
 
-            const animals = ['cane', 'gatto', 'topo']
+            const [animals, setAnimals] = useState([]);
+            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+
+            function addAnimals() {
+                const randomIndex = Math.floor(Math.random() * animalsChoices.length);
+                const randomAnimal = animalsChoices[randomIndex];
+                setAnimals(curr => [...curr, randomAnimal])
+
+            }
 
             return (
                 <>
                 <h1>sono reactapp!</h1>
+                <button onClick={addAnimals}>Aggiungi Animale</button>
                 <details>
                     <summary>Animali</summary>
                     <ul>
-                        {animals.map(a=><li key={a}>{a}</li>)}
+                        {animals.map((a, i)=><li key={i}>{a}</li>)}
                     </ul>
                 </details>
                 </>
